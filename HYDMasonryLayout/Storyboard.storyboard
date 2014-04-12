@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="QkN-lX-zZk">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <scenes>
+        <!--Masonry Layout View Controller-->
+        <scene sceneID="6jU-Jk-CYn">
+            <objects>
+                <collectionViewController autoresizesArchivedViewToFullSize="NO" id="8ql-4H-YGr" customClass="HYDMasonryLayoutViewController" sceneMemberID="viewController">
+                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="yAW-Jq-uXc">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewLayout key="collectionViewLayout" id="ddA-bs-KEx" customClass="HYDCollectionViewMasonryLayout"/>
+                        <cells/>
+                        <connections>
+                            <outlet property="dataSource" destination="8ql-4H-YGr" id="VJe-O0-X3c"/>
+                            <outlet property="delegate" destination="8ql-4H-YGr" id="JQN-sm-WQR"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="can-Iu-CHi">
+                        <nil key="title"/>
+                        <view key="titleView" contentMode="scaleToFill" id="X5y-dz-Q3C">
+                            <rect key="frame" x="10" y="6" width="300" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="dbq-3h-GnC">
+                                    <rect key="frame" x="0.0" y="2" width="126" height="29"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="126" id="McX-Uh-WKY"/>
+                                    </constraints>
+                                    <segments>
+                                        <segment title="Number"/>
+                                        <segment title="Name"/>
+                                    </segments>
+                                    <connections>
+                                        <action selector="orderChanged:" destination="8ql-4H-YGr" eventType="valueChanged" id="9Xs-t6-rNe"/>
+                                    </connections>
+                                </segmentedControl>
+                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Ybd-cp-RhQ">
+                                    <rect key="frame" x="158" y="2" width="142" height="29"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="142" id="QIA-MO-kjf"/>
+                                    </constraints>
+                                    <segments>
+                                        <segment title="Full name"/>
+                                        <segment title="-ium name"/>
+                                    </segments>
+                                    <connections>
+                                        <action selector="nameFilterChanged:" destination="8ql-4H-YGr" eventType="valueChanged" id="82c-rB-5t9"/>
+                                    </connections>
+                                </segmentedControl>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="dbq-3h-GnC" firstAttribute="top" secondItem="X5y-dz-Q3C" secondAttribute="top" constant="2" id="9ra-Ky-Q0W"/>
+                                <constraint firstItem="Ybd-cp-RhQ" firstAttribute="leading" secondItem="dbq-3h-GnC" secondAttribute="trailing" constant="32" id="LAF-h7-W85"/>
+                                <constraint firstItem="dbq-3h-GnC" firstAttribute="leading" secondItem="X5y-dz-Q3C" secondAttribute="leading" id="bzI-NU-EjG"/>
+                                <constraint firstItem="dbq-3h-GnC" firstAttribute="top" secondItem="Ybd-cp-RhQ" secondAttribute="top" id="mgL-Yz-zIr"/>
+                            </constraints>
+                        </view>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="filterSegmentedControl" destination="Ybd-cp-RhQ" id="mZQ-vd-vZd"/>
+                        <outlet property="layout" destination="ddA-bs-KEx" id="z7F-bG-ECx"/>
+                        <outlet property="sortSegmentedControl" destination="dbq-3h-GnC" id="cyy-Zo-875"/>
+                    </connections>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ijx-DU-5UB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="775" y="-355"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="KKG-dQ-HxY">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QkN-lX-zZk" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3vf-s7-OBX">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="8ql-4H-YGr" kind="relationship" relationship="rootViewController" id="AnN-Yv-OkI"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1TB-WI-pCj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="249" y="-355"/>
+        </scene>
+    </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

@@ -19,6 +19,14 @@
 		A9B6C64F18F8D5770043859F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B6C63718F8D5770043859F /* UIKit.framework */; };
 		A9B6C65718F8D5770043859F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A9B6C65518F8D5770043859F /* InfoPlist.strings */; };
 		A9B6C65918F8D5770043859F /* HYDMasonryLayoutTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A9B6C65818F8D5770043859F /* HYDMasonryLayoutTests.m */; };
+		A9B6C66318F8D5960043859F /* periodictabledump copy.csv in Resources */ = {isa = PBXBuildFile; fileRef = A9B6C66218F8D5960043859F /* periodictabledump copy.csv */; };
+		A9B6C66618F8D5C10043859F /* HYDMasonryLayoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A9B6C66518F8D5C10043859F /* HYDMasonryLayoutViewController.m */; };
+		A9B6C66D18F8D6090043859F /* HYDElement.m in Sources */ = {isa = PBXBuildFile; fileRef = A9B6C66C18F8D6090043859F /* HYDElement.m */; };
+		A9B6C67118F8D6890043859F /* HYDElementCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A9B6C66E18F8D6890043859F /* HYDElementCell.m */; };
+		A9B6C67218F8D6890043859F /* HYDElementCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9B6C66F18F8D6890043859F /* HYDElementCell.xib */; };
+		A9B6C67518F8D6A60043859F /* Storyboard-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9B6C67318F8D6A60043859F /* Storyboard-iPad.storyboard */; };
+		A9B6C67618F8D6A60043859F /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9B6C67418F8D6A60043859F /* Storyboard.storyboard */; };
+		A9B6C67918F8D7740043859F /* HYDCollectionViewMasonryLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A9B6C67818F8D7740043859F /* HYDCollectionViewMasonryLayout.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +56,18 @@
 		A9B6C65418F8D5770043859F /* HYDMasonryLayoutTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HYDMasonryLayoutTests-Info.plist"; sourceTree = "<group>"; };
 		A9B6C65618F8D5770043859F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A9B6C65818F8D5770043859F /* HYDMasonryLayoutTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HYDMasonryLayoutTests.m; sourceTree = "<group>"; };
+		A9B6C66218F8D5960043859F /* periodictabledump copy.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "periodictabledump copy.csv"; sourceTree = "<group>"; };
+		A9B6C66418F8D5C10043859F /* HYDMasonryLayoutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HYDMasonryLayoutViewController.h; sourceTree = "<group>"; };
+		A9B6C66518F8D5C10043859F /* HYDMasonryLayoutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HYDMasonryLayoutViewController.m; sourceTree = "<group>"; };
+		A9B6C66B18F8D6090043859F /* HYDElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HYDElement.h; sourceTree = "<group>"; };
+		A9B6C66C18F8D6090043859F /* HYDElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HYDElement.m; sourceTree = "<group>"; };
+		A9B6C66E18F8D6890043859F /* HYDElementCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HYDElementCell.m; sourceTree = "<group>"; };
+		A9B6C66F18F8D6890043859F /* HYDElementCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HYDElementCell.xib; sourceTree = "<group>"; };
+		A9B6C67018F8D6890043859F /* HYDElementCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HYDElementCell.h; sourceTree = "<group>"; };
+		A9B6C67318F8D6A60043859F /* Storyboard-iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Storyboard-iPad.storyboard"; sourceTree = "<group>"; };
+		A9B6C67418F8D6A60043859F /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
+		A9B6C67718F8D7740043859F /* HYDCollectionViewMasonryLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HYDCollectionViewMasonryLayout.h; sourceTree = "<group>"; };
+		A9B6C67818F8D7740043859F /* HYDCollectionViewMasonryLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HYDCollectionViewMasonryLayout.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,8 +127,10 @@
 		A9B6C63918F8D5770043859F /* HYDMasonryLayout */ = {
 			isa = PBXGroup;
 			children = (
-				A9B6C64218F8D5770043859F /* HYDAppDelegate.h */,
-				A9B6C64318F8D5770043859F /* HYDAppDelegate.m */,
+				A9B6C66A18F8D5E10043859F /* Delegate */,
+				A9B6C66918F8D5D60043859F /* Models */,
+				A9B6C66818F8D5CF0043859F /* Views */,
+				A9B6C66718F8D5C80043859F /* Controllers */,
 				A9B6C64518F8D5770043859F /* Images.xcassets */,
 				A9B6C63A18F8D5770043859F /* Supporting Files */,
 			);
@@ -142,6 +164,48 @@
 				A9B6C65518F8D5770043859F /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A9B6C66718F8D5C80043859F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A9B6C66418F8D5C10043859F /* HYDMasonryLayoutViewController.h */,
+				A9B6C66518F8D5C10043859F /* HYDMasonryLayoutViewController.m */,
+				A9B6C67718F8D7740043859F /* HYDCollectionViewMasonryLayout.h */,
+				A9B6C67818F8D7740043859F /* HYDCollectionViewMasonryLayout.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		A9B6C66818F8D5CF0043859F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A9B6C67318F8D6A60043859F /* Storyboard-iPad.storyboard */,
+				A9B6C67418F8D6A60043859F /* Storyboard.storyboard */,
+				A9B6C66F18F8D6890043859F /* HYDElementCell.xib */,
+				A9B6C67018F8D6890043859F /* HYDElementCell.h */,
+				A9B6C66E18F8D6890043859F /* HYDElementCell.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		A9B6C66918F8D5D60043859F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A9B6C66B18F8D6090043859F /* HYDElement.h */,
+				A9B6C66C18F8D6090043859F /* HYDElement.m */,
+				A9B6C66218F8D5960043859F /* periodictabledump copy.csv */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		A9B6C66A18F8D5E10043859F /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				A9B6C64218F8D5770043859F /* HYDAppDelegate.h */,
+				A9B6C64318F8D5770043859F /* HYDAppDelegate.m */,
+			);
+			name = Delegate;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,8 +284,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9B6C66318F8D5960043859F /* periodictabledump copy.csv in Resources */,
 				A9B6C63E18F8D5770043859F /* InfoPlist.strings in Resources */,
+				A9B6C67218F8D6890043859F /* HYDElementCell.xib in Resources */,
+				A9B6C67518F8D6A60043859F /* Storyboard-iPad.storyboard in Resources */,
 				A9B6C64618F8D5770043859F /* Images.xcassets in Resources */,
+				A9B6C67618F8D6A60043859F /* Storyboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,6 +309,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A9B6C64418F8D5770043859F /* HYDAppDelegate.m in Sources */,
+				A9B6C66618F8D5C10043859F /* HYDMasonryLayoutViewController.m in Sources */,
+				A9B6C67118F8D6890043859F /* HYDElementCell.m in Sources */,
+				A9B6C66D18F8D6090043859F /* HYDElement.m in Sources */,
+				A9B6C67918F8D7740043859F /* HYDCollectionViewMasonryLayout.m in Sources */,
 				A9B6C64018F8D5770043859F /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
