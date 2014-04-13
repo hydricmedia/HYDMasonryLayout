@@ -31,8 +31,10 @@
         _elementWeight = [[array[1] stringByTrimmingCharactersInSet:charSet] floatValue];
         _elementName = [array[2] stringByTrimmingCharactersInSet:charSet];
         _elementSymbol = [array[3] stringByTrimmingCharactersInSet:charSet];
-        _elementWidth = [self itemWidth];
-        _elementHeight = [self itemHeight];
+        _elementWidth = [[array[4] stringByTrimmingCharactersInSet:charSet] floatValue];
+        _elementHeight = [[array[5] stringByTrimmingCharactersInSet:charSet] floatValue];
+//        _elementWidth = [self itemWidth];
+//        _elementHeight = [self itemHeight];
     }
     
     return self;
@@ -51,8 +53,8 @@
 - (CGFloat)itemWidth {
     
     NSUInteger xRand = 0;
-    while (xRand < 10) {
-        xRand = arc4random() % 786;
+    while (xRand < 50) {
+        xRand = arc4random() % 400;
     }
     
     return (CGFloat)xRand;
@@ -61,7 +63,7 @@
 - (CGFloat)itemHeight {
     
     NSUInteger yRand = 0;
-    while (yRand < 10) {
+    while (yRand < 50) {
         yRand = arc4random() % 300;
     }
     

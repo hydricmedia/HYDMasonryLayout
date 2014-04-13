@@ -11,10 +11,11 @@
 #import "HYDElementCell.h"
 #import "HYDElement.h"
 
-@interface HYDMasonryLayoutViewController () <UICollectionViewDataSource, HYDCollectionViewMasonryLayoutDelegate>
+@interface HYDMasonryLayoutViewController () <UICollectionViewDataSource, UICollectionViewDelegate, HYDCollectionViewMasonryLayoutDelegate>
 
-@property (weak, nonatomic) IBOutlet UISegmentedControl *sortSegmentedControl;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *filterSegmentedControl;
+@property (nonatomic, weak) IBOutlet HYDCollectionViewMasonryLayout *layout;
+@property (nonatomic, weak) IBOutlet UISegmentedControl *sortSegmentedControl;
+@property (nonatomic, weak) IBOutlet UISegmentedControl *filterSegmentedControl;
 
 @property (nonatomic, strong) NSMutableArray *elements;
 
@@ -28,6 +29,20 @@
     
     [self createElements];
     [self registerNibs];
+}
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    [self.collectionViewLayout invalidateLayout];
+}
+
+#pragma mark - Accessors
+- (NSMutableArray *)elements
+{
+    if (!_elements) {
+        _elements = [NSMutableArray new];
+    }
+    
+    return _elements;
 }
 
 #pragma mark - Actions
@@ -48,12 +63,27 @@
     return [self.elements count];
 }
 
+#pragma mark - UICollectionViewDelegate conformance
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    HYDElementCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([HYDElementCell class]) forIndexPath:indexPath];
+    [self configureCell:cell forIndexPath:indexPath];
+    
+    return cell;
+}
+
 #pragma mark - HYDCollectionViewMasonryLayoutDelegate conformance
 
 - (NSUInteger)numberOfColumnsInCollectionView:(UICollectionView *)collectionView {
     
     UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
     return (UIInterfaceOrientationIsPortrait(orientation)) ? 4 : 5;
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+//    return UIEdgeInsetsMake(20.f, 10.f, 20.f, 10.f);
+    return UIEdgeInsetsMake(0.f, 0.f, 0.f, 0.f);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -82,7 +112,17 @@
     return 0.f;
 }
 
-#pragma mark - Private Methods
+#pragma mark - Helpers
+
+- (void)configureCell:(HYDElementCell *)cell forIndexPath:(NSIndexPath *)indexPath {
+    
+    HYDElement *element = self.elements[indexPath.item];
+    
+    cell.elementName = element.elementName;
+    cell.elementNumberLabel.text = [NSString stringWithFormat:@"%d", element.elementNo];
+    cell.elementNameLabel.text = element.elementName;
+    cell.elementSymbolLabel.text = element.elementSymbol;
+}
 
 - (void)createElements {
     NSError *error;
@@ -98,6 +138,7 @@
         NSArray *lineArray = [elementsLine componentsSeparatedByString:@","];
         HYDElement *element = [[HYDElement alloc] initWithLineArray:lineArray];
         [self.elements addObject:element];
+        NSLog(@"%@", [element descriptionWithWidthAndHeight]);
     }];
 }
 

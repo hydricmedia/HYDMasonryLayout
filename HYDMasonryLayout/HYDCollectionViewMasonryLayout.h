@@ -10,6 +10,13 @@
 
 @protocol HYDCollectionViewMasonryLayoutDelegate;
 
+@interface HYDCollectionViewMasonryLayoutAttributes : UICollectionViewLayoutAttributes
+
+@property (nonatomic, assign) NSInteger columnIndex;
+@property (nonatomic, assign) NSUInteger columnSpan;
+
+@end
+
 @interface HYDCollectionViewMasonryLayout : UICollectionViewLayout
 
 @property (nonatomic) CGFloat minimumLineSpacing;
@@ -17,7 +24,7 @@
 @property (nonatomic) CGSize headerReferenceSize;
 @property (nonatomic) CGSize footerReferenceSize;
 @property (nonatomic) UIEdgeInsets sectionInset;
-@property (nonatomic, weak) id<HYDCollectionViewMasonryLayoutDelegate> delegate;
+@property (nonatomic, weak) IBOutlet id<HYDCollectionViewMasonryLayoutDelegate> delegate;
 
 @end
 

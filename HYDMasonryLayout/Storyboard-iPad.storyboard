@@ -12,7 +12,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.96078437569999997" green="0.96078437569999997" blue="0.96078437569999997" alpha="1" colorSpace="deviceRGB"/>
-                        <collectionViewLayout key="collectionViewLayout" id="DRG-b2-T0G" customClass="HYDCollectionViewMasonryLayout"/>
+                        <collectionViewLayout key="collectionViewLayout" id="DRG-b2-T0G" customClass="HYDCollectionViewMasonryLayout">
+                            <connections>
+                                <outlet property="delegate" destination="uCz-0e-XUE" id="TA2-bT-ca9"/>
+                            </connections>
+                        </collectionViewLayout>
                         <cells/>
                         <connections>
                             <outlet property="dataSource" destination="uCz-0e-XUE" id="Mk8-Wf-hwy"/>
@@ -67,7 +71,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="filterSegmentedControl" destination="4Hw-7n-pSl" id="6bW-L6-5BA"/>
-                        <outlet property="layout" destination="DRG-b2-T0G" id="Mgl-om-JrP"/>
+                        <outlet property="layout" destination="DRG-b2-T0G" id="xNV-vx-EY7"/>
                         <outlet property="sortSegmentedControl" destination="NSP-LH-LoW" id="Zi2-ra-sqU"/>
                     </connections>
                 </collectionViewController>
