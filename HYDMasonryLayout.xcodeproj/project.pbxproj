@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A9976C9918FA664F002EA08F /* periodictabledump.csv.bak in Resources */ = {isa = PBXBuildFile; fileRef = A9976C9818FA664F002EA08F /* periodictabledump.csv.bak */; };
 		A9B6C63418F8D5770043859F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B6C63318F8D5770043859F /* Foundation.framework */; };
 		A9B6C63618F8D5770043859F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B6C63518F8D5770043859F /* CoreGraphics.framework */; };
 		A9B6C63818F8D5770043859F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B6C63718F8D5770043859F /* UIKit.framework */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A9976C9818FA664F002EA08F /* periodictabledump.csv.bak */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = periodictabledump.csv.bak; sourceTree = "<group>"; };
 		A9B6C63018F8D5770043859F /* HYDMasonryLayout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HYDMasonryLayout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9B6C63318F8D5770043859F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A9B6C63518F8D5770043859F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -196,6 +198,7 @@
 			children = (
 				A9B6C66B18F8D6090043859F /* HYDElement.h */,
 				A9B6C66C18F8D6090043859F /* HYDElement.m */,
+				A9976C9818FA664F002EA08F /* periodictabledump.csv.bak */,
 				A9B6C66218F8D5960043859F /* periodictabledump.csv */,
 			);
 			name = Models;
@@ -286,6 +289,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9976C9918FA664F002EA08F /* periodictabledump.csv.bak in Resources */,
 				A9B6C66318F8D5960043859F /* periodictabledump.csv in Resources */,
 				A9B6C63E18F8D5770043859F /* InfoPlist.strings in Resources */,
 				A9B6C67218F8D6890043859F /* HYDElementCell.xib in Resources */,
@@ -532,6 +536,7 @@
 				A9B6C65E18F8D5770043859F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A9B6C65F18F8D5770043859F /* Build configuration list for PBXNativeTarget "HYDMasonryLayoutTests" */ = {
 			isa = XCConfigurationList;
@@ -540,6 +545,7 @@
 				A9B6C66118F8D5770043859F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -31,10 +31,10 @@
         _elementWeight = [[array[1] stringByTrimmingCharactersInSet:charSet] floatValue];
         _elementName = [array[2] stringByTrimmingCharactersInSet:charSet];
         _elementSymbol = [array[3] stringByTrimmingCharactersInSet:charSet];
-        _elementWidth = [[array[4] stringByTrimmingCharactersInSet:charSet] floatValue];
-        _elementHeight = [[array[5] stringByTrimmingCharactersInSet:charSet] floatValue];
-//        _elementWidth = [self itemWidth];
-//        _elementHeight = [self itemHeight];
+//        _elementWidth = [[array[4] stringByTrimmingCharactersInSet:charSet] floatValue];
+//        _elementHeight = [[array[5] stringByTrimmingCharactersInSet:charSet] floatValue];
+        _elementWidth = [self itemWidth];
+        _elementHeight = [self itemHeight];
     }
     
     return self;

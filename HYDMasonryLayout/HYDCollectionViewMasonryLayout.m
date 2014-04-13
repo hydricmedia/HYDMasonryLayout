@@ -156,9 +156,14 @@
 - (CGSize)collectionViewContentSize {
     
     __block CGFloat height = 0;
-    [[self.layoutInfo allValues] enumerateObjectsUsingBlock:^(HYDCollectionViewMasonryLayoutAttributes *attr, NSUInteger idx, BOOL *stop) {
-        height = MAX(CGRectGetMaxY(attr.frame), height);
+    
+    [self.columnHeights enumerateObjectsUsingBlock:^(NSNumber *columnHeight, NSUInteger idx, BOOL *stop) {
+        height = MAX([columnHeight floatValue], height);
     }];
+    
+//    [[self.layoutInfo allValues] enumerateObjectsUsingBlock:^(HYDCollectionViewMasonryLayoutAttributes *attr, NSUInteger idx, BOOL *stop) {
+//        height = MAX(CGRectGetMaxY(attr.frame), height);
+//    }];
     
     return CGSizeMake(CGRectGetWidth(self.collectionView.bounds), height + self.sectionInset.bottom);
 }
@@ -209,7 +214,8 @@
         origin.y = [self yOriginForItemWithAttributes:attributes] + origin.y;
     }
     
-    // Update Column heights
+    // Update Column heights array
+    
     for (NSUInteger i=attributes.columnIndex; i < attributes.columnIndex + attributes.columnSpan; i++) {
         self.columnHeights[i] = @(origin.y + attributes.size.height);
     }
@@ -242,20 +248,9 @@
 - (CGFloat)yOriginForItemWithAttributes:(HYDCollectionViewMasonryLayoutAttributes *)attributes {
     
     __block CGFloat yPosition = 0;
-    
-    //Use column heights here
-    
     for (NSUInteger i=attributes.columnIndex; i<attributes.columnIndex + attributes.columnSpan; i++) {
         yPosition = MAX([self.columnHeights[i] floatValue], yPosition);
     }
-    
-//    [[self.layoutInfo allValues] enumerateObjectsUsingBlock:^(HYDCollectionViewMasonryLayoutAttributes *attr, NSUInteger idx, BOOL *stop) {
-//        for (NSUInteger i=attributes.columnIndex; i <= attributes.columnIndex + (attributes.columnSpan-1); i++) {
-//            if ((i >= attr.columnIndex) && (i <= attr.columnIndex + (attr.columnSpan-1))) {
-//                yPosition = MAX(CGRectGetMaxY(attr.frame), yPosition);
-//            }
-//        }
-//    }];
     
     return yPosition;
 }
