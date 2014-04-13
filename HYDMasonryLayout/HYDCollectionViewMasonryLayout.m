@@ -63,43 +63,6 @@
     _layoutInfo = nil;
 }
 
-#pragma mark - Accessors
-
-- (NSMutableDictionary *)layoutInfo {
-    
-    if (!_layoutInfo) {
-        _layoutInfo = [NSMutableDictionary new];
-    }
-    
-    return _layoutInfo;
-}
-
-- (NSMutableArray *)columnHeights {
-    
-    if (!_columnHeights) {
-        _columnHeights = [NSMutableArray arrayWithCapacity:_numberOfColumns];
-    }
-    
-    return _columnHeights;
-}
-
-- (void)setNumberOfColumns:(NSUInteger)numberOfColumns {
-    
-    if (_numberOfColumns != numberOfColumns && numberOfColumns != 0) {
-        _numberOfColumns = numberOfColumns;
-        [self configureColumnWidth];
-        [self invalidateLayout];
-    }
-}
-
-- (void)setSectionInset:(UIEdgeInsets)sectionInset {
-    
-    if (!UIEdgeInsetsEqualToEdgeInsets(_sectionInset, sectionInset)) {
-        _sectionInset = sectionInset;
-        [self invalidateLayout];
-    }
-}
-
 #pragma mark - Layout
 
 - (void)prepareLayout {
@@ -112,6 +75,7 @@
     
     [self configureSectionInsetsForSectionAtIndex:0]; //Currently only one section
     [self configureMinInteritemSpacingForSectionAtIndex:0];
+    [self configureMinLineSpacingForSectionAtIndex:0];
     [self configureColumnsForSectionAtIndex:0];
     
     for (NSUInteger i=0; i < self.numberOfColumns; i++) {
@@ -161,37 +125,63 @@
         height = MAX([columnHeight floatValue], height);
     }];
     
-//    [[self.layoutInfo allValues] enumerateObjectsUsingBlock:^(HYDCollectionViewMasonryLayoutAttributes *attr, NSUInteger idx, BOOL *stop) {
-//        height = MAX(CGRectGetMaxY(attr.frame), height);
-//    }];
-    
     return CGSizeMake(CGRectGetWidth(self.collectionView.bounds), height + self.sectionInset.bottom);
 }
 
-#pragma mark - Helpers
+#pragma mark - Accessors
 
-- (void)configureSectionInsetsForSectionAtIndex:(NSUInteger)section {
+- (NSMutableDictionary *)layoutInfo {
     
-    if ([self.delegate respondsToSelector:@selector(collectionView:layout:insetForSectionAtIndex:)]) {
-        _sectionInset = [self.delegate collectionView:self.collectionView layout:self insetForSectionAtIndex:section];
+    if (!_layoutInfo) {
+        _layoutInfo = [NSMutableDictionary new];
     }
+    
+    return _layoutInfo;
 }
 
-- (void)configureMinInteritemSpacingForSectionAtIndex:(NSUInteger)section {
+- (NSMutableArray *)columnHeights {
     
-    if ([self.delegate respondsToSelector:@selector(collectionView:layout:minimumInteritemSpacingForSectionAtIndex:)]) {
-        _minimumInteritemSpacing = [self.delegate collectionView:self.collectionView layout:self minimumInteritemSpacingForSectionAtIndex:section];
+    if (!_columnHeights) {
+        _columnHeights = [NSMutableArray arrayWithCapacity:_numberOfColumns];
     }
+    
+    return _columnHeights;
 }
 
-- (void)configureColumnsForSectionAtIndex:(NSUInteger)section {
+- (void)setNumberOfColumns:(NSUInteger)numberOfColumns {
     
-    if ([self.delegate respondsToSelector:@selector(numberOfColumnsInCollectionView:)]) {
-        _numberOfColumns = [self.delegate numberOfColumnsInCollectionView:self.collectionView];
-        _numberOfColumns = (_numberOfColumns == 0) ? 1: _numberOfColumns;
+    if (_numberOfColumns != numberOfColumns && numberOfColumns != 0) {
+        _numberOfColumns = numberOfColumns;
         [self configureColumnWidth];
+        [self invalidateLayout];
     }
 }
+
+- (void)setSectionInset:(UIEdgeInsets)sectionInset {
+    
+    if (!UIEdgeInsetsEqualToEdgeInsets(_sectionInset, sectionInset)) {
+        _sectionInset = sectionInset;
+        [self invalidateLayout];
+    }
+}
+
+- (void)setMinimumLineSpacing:(CGFloat)minimumLineSpacing {
+    
+    if (_minimumLineSpacing != minimumLineSpacing) {
+        _minimumLineSpacing = minimumLineSpacing;
+        [self invalidateLayout];
+    }
+}
+
+- (void)setMinimumInteritemSpacing:(CGFloat)minimumInteritemSpacing {
+    
+    if (!_minimumInteritemSpacing != minimumInteritemSpacing) {
+        _minimumInteritemSpacing = minimumInteritemSpacing;
+        [self invalidateLayout];
+    }
+}
+
+#pragma mark - Helpers
 
 - (CGSize)sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -252,6 +242,8 @@
         yPosition = MAX([self.columnHeights[i] floatValue], yPosition);
     }
     
+    yPosition = yPosition + self.minimumLineSpacing;
+    
     return yPosition;
 }
 
@@ -272,9 +264,39 @@
 
 - (void)configureColumnWidth {
     
-    
+    //interitemSpacing
     
     self.columnWidth = floor((CGRectGetWidth(self.collectionView.bounds) - self.sectionInset.left - self.sectionInset.right) / self.numberOfColumns);
+}
+
+- (void)configureSectionInsetsForSectionAtIndex:(NSUInteger)section {
+    
+    if ([self.delegate respondsToSelector:@selector(collectionView:layout:insetForSectionAtIndex:)]) {
+        _sectionInset = [self.delegate collectionView:self.collectionView layout:self insetForSectionAtIndex:section];
+    }
+}
+
+- (void)configureMinLineSpacingForSectionAtIndex:(NSUInteger)section {
+    
+    if ([self.delegate respondsToSelector:@selector(collectionView:layout:minimumLineSpacingForSectionAtIndex:)]) {
+        _minimumLineSpacing = [self.delegate collectionView:self.collectionView layout:self minimumLineSpacingForSectionAtIndex:0];
+    }
+}
+
+- (void)configureMinInteritemSpacingForSectionAtIndex:(NSUInteger)section {
+    
+    if ([self.delegate respondsToSelector:@selector(collectionView:layout:minimumInteritemSpacingForSectionAtIndex:)]) {
+        _minimumInteritemSpacing = [self.delegate collectionView:self.collectionView layout:self minimumInteritemSpacingForSectionAtIndex:section];
+    }
+}
+
+- (void)configureColumnsForSectionAtIndex:(NSUInteger)section {
+    
+    if ([self.delegate respondsToSelector:@selector(numberOfColumnsInCollectionView:)]) {
+        _numberOfColumns = [self.delegate numberOfColumnsInCollectionView:self.collectionView];
+        _numberOfColumns = (_numberOfColumns == 0) ? 1: _numberOfColumns;
+        [self configureColumnWidth];
+    }
 }
 
 @end

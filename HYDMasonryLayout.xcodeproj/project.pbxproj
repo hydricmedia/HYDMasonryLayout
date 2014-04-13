@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A9976C9918FA664F002EA08F /* periodictabledump.csv.bak in Resources */ = {isa = PBXBuildFile; fileRef = A9976C9818FA664F002EA08F /* periodictabledump.csv.bak */; };
+		A9976C9B18FA68D0002EA08F /* periodictabledump.csv.bak2.csv in Resources */ = {isa = PBXBuildFile; fileRef = A9976C9A18FA68D0002EA08F /* periodictabledump.csv.bak2.csv */; };
 		A9B6C63418F8D5770043859F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B6C63318F8D5770043859F /* Foundation.framework */; };
 		A9B6C63618F8D5770043859F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B6C63518F8D5770043859F /* CoreGraphics.framework */; };
 		A9B6C63818F8D5770043859F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9B6C63718F8D5770043859F /* UIKit.framework */; };
@@ -42,6 +43,7 @@
 
 /* Begin PBXFileReference section */
 		A9976C9818FA664F002EA08F /* periodictabledump.csv.bak */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = periodictabledump.csv.bak; sourceTree = "<group>"; };
+		A9976C9A18FA68D0002EA08F /* periodictabledump.csv.bak2.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = periodictabledump.csv.bak2.csv; sourceTree = "<group>"; };
 		A9B6C63018F8D5770043859F /* HYDMasonryLayout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HYDMasonryLayout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9B6C63318F8D5770043859F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A9B6C63518F8D5770043859F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -144,6 +146,9 @@
 		A9B6C63A18F8D5770043859F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A9976C9A18FA68D0002EA08F /* periodictabledump.csv.bak2.csv */,
+				A9976C9818FA664F002EA08F /* periodictabledump.csv.bak */,
+				A9B6C66218F8D5960043859F /* periodictabledump.csv */,
 				A9B6C63B18F8D5770043859F /* HYDMasonryLayout-Info.plist */,
 				A9B6C63C18F8D5770043859F /* InfoPlist.strings */,
 				A9B6C63F18F8D5770043859F /* main.m */,
@@ -198,8 +203,6 @@
 			children = (
 				A9B6C66B18F8D6090043859F /* HYDElement.h */,
 				A9B6C66C18F8D6090043859F /* HYDElement.m */,
-				A9976C9818FA664F002EA08F /* periodictabledump.csv.bak */,
-				A9B6C66218F8D5960043859F /* periodictabledump.csv */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 				A9B6C63E18F8D5770043859F /* InfoPlist.strings in Resources */,
 				A9B6C67218F8D6890043859F /* HYDElementCell.xib in Resources */,
 				A9B6C67518F8D6A60043859F /* Storyboard-iPad.storyboard in Resources */,
+				A9976C9B18FA68D0002EA08F /* periodictabledump.csv.bak2.csv in Resources */,
 				A9B6C64618F8D5770043859F /* Images.xcassets in Resources */,
 				A9B6C67618F8D6A60043859F /* Storyboard.storyboard in Resources */,
 			);
