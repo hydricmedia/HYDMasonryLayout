@@ -242,7 +242,9 @@
         yPosition = MAX([self.columnHeights[i] floatValue], yPosition);
     }
     
-    yPosition = yPosition + self.minimumLineSpacing;
+    if ([self.columnHeights[attributes.columnIndex] integerValue] > 0) {
+        yPosition = yPosition + self.minimumLineSpacing;
+    }
     
     return yPosition;
 }
