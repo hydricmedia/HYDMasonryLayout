@@ -8,11 +8,13 @@
 
 #import "HYDCollectionViewMasonryLayout.h"
 
+static NSString *const HYDMasonryContentCell = @"HYDMasonryContentCell";
+
 @interface HYDCollectionViewMasonryLayout ()
 
-@property (nonatomic, strong) NSMutableDictionary *layoutInfo;
+@property (nonatomic, strong) NSDictionary *layoutInfo;
 @property (nonatomic, assign) NSUInteger numberOfColumns;
-@property (nonatomic, strong) NSMutableArray *columnHeights;
+@property (nonatomic, strong) NSMutableDictionary *columnHeights;
 @property (nonatomic, assign) CGFloat columnWidth;
 
 @end
@@ -73,48 +75,62 @@
     
     self.layoutInfo = nil;
     
-    [self configureSectionInsetsForSectionAtIndex:0]; //Currently only one section
-    [self configureMinInteritemSpacingForSectionAtIndex:0];
-    [self configureMinLineSpacingForSectionAtIndex:0];
-    [self configureColumnsForSectionAtIndex:0];
+    NSMutableDictionary *newLayoutInfo = [NSMutableDictionary dictionary];
+    NSMutableDictionary *cellLayoutInfo = [NSMutableDictionary dictionary];
     
-    for (NSUInteger i=0; i < self.numberOfColumns; i++) {
-        self.columnHeights[i] = @(self.sectionInset.top); // plus header height
-    }
+    NSInteger sectionCount = [self.collectionView numberOfSections];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:0];
     
-    NSIndexPath *indexPath;
-    NSInteger itemCount = [self.collectionView numberOfItemsInSection:0];
-    
-    for (NSInteger item = 0; item < itemCount; item++) {
+    for (NSInteger section = 0; section < sectionCount; section++) {
         
-        indexPath = [NSIndexPath indexPathForItem:item inSection:0];
-        HYDCollectionViewMasonryLayoutAttributes *attributes = [HYDCollectionViewMasonryLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
+        NSInteger itemCount = [self.collectionView numberOfItemsInSection:section];
+        
+        [self configureSectionInsetsForSectionAtIndex:section];
+        [self configureMinInteritemSpacingForSectionAtIndex:section];
+        [self configureMinLineSpacingForSectionAtIndex:section];
+        [self configureColumnsForSectionAtIndex:section];
+        
+        for (NSUInteger i=0; i < self.numberOfColumns; i++) {
+            self.columnHeights[@(section)] = @(self.sectionInset.top); // plus header height;
+        }
 
-        attributes.size = [self sizeForItemAtIndexPath:indexPath];
-        attributes.columnSpan = [self columnSpanForItemWithAttributes:attributes];
-        CGPoint origin = [self originForItemWithAttributes:(HYDCollectionViewMasonryLayoutAttributes *)attributes];
+        for (NSInteger item = 0; item < itemCount; item++) {
+            
+            indexPath = [NSIndexPath indexPathForItem:item inSection:section];
+            HYDCollectionViewMasonryLayoutAttributes *attributes = [HYDCollectionViewMasonryLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
+            
+            attributes.size = [self sizeForItemAtIndexPath:indexPath];
+            attributes.columnSpan = [self columnSpanForItemWithAttributes:attributes];
+            CGPoint origin = [self originForItemWithAttributes:(HYDCollectionViewMasonryLayoutAttributes *)attributes];
+            
+            attributes.frame = CGRectMake(origin.x, origin.y, attributes.size.width, attributes.size.height);
+            
+            cellLayoutInfo[indexPath] = attributes;
+        }
         
-        attributes.frame = CGRectMake(origin.x, origin.y, attributes.size.width, attributes.size.height);
-        
-        self.layoutInfo[indexPath] = attributes;
+        newLayoutInfo[HYDMasonryContentCell] = cellLayoutInfo;
     }
+
+    self.layoutInfo = newLayoutInfo;
 }
 
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect {
     
     NSMutableArray *attributesArray = [NSMutableArray new];
     
-    [self.layoutInfo enumerateKeysAndObjectsUsingBlock:^(NSIndexPath *indexPath, UICollectionViewLayoutAttributes *attributes, BOOL *stop) {
-        if (CGRectIntersectsRect(rect, attributes.frame)) {
-            [attributesArray addObject:self.layoutInfo[indexPath]];
-        }
+    [self.layoutInfo enumerateKeysAndObjectsUsingBlock:^(NSString *elementType, NSDictionary *elementsInfo, BOOL *stop) {
+        [elementsInfo enumerateKeysAndObjectsUsingBlock:^(NSIndexPath *indexPath, UICollectionViewLayoutAttributes *attributes, BOOL *innerStop) {
+            if (CGRectIntersectsRect(rect, attributes.frame)) {
+                [attributesArray addObject:attributes];
+            }
+        }];
     }];
     
     return attributesArray;
 }
 
 - (UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return self.layoutInfo[indexPath];
+    return self.layoutInfo[HYDMasonryContentCell][indexPath];
 }
 
 - (CGSize)collectionViewContentSize {
@@ -130,19 +146,10 @@
 
 #pragma mark - Accessors
 
-- (NSMutableDictionary *)layoutInfo {
-    
-    if (!_layoutInfo) {
-        _layoutInfo = [NSMutableDictionary new];
-    }
-    
-    return _layoutInfo;
-}
-
-- (NSMutableArray *)columnHeights {
+- (NSMutableDictionary *)columnHeights {
     
     if (!_columnHeights) {
-        _columnHeights = [NSMutableArray arrayWithCapacity:_numberOfColumns];
+        _columnHeights = [NSMutableDictionary dictionaryWithCapacity:self.numberOfColumns];
     }
     
     return _columnHeights;
