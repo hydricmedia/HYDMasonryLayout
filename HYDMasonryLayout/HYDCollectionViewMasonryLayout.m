@@ -53,6 +53,11 @@
 }
 
 - (void)setup {
+    
+    _numberOfColumns = 2;
+    _minimumLineSpacing = 10.f;
+    _minimumInteritemSpacing = 10.f;
+    _sectionInset = UIEdgeInsetsZero;
 }
 
 - (void)dealloc
