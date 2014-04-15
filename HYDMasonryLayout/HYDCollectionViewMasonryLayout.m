@@ -94,9 +94,12 @@ static NSString *const HYDMasonryContentCell = @"HYDMasonryContentCell";
         [self configureMinInteritemSpacingForSectionAtIndex:section];
         [self configureMinLineSpacingForSectionAtIndex:section];
         [self configureColumnsForSectionAtIndex:section];
+
+        NSMutableArray *heights = [NSMutableArray arrayWithCapacity:self.numberOfColumns];
         
         for (NSUInteger i=0; i < self.numberOfColumns; i++) {
-            self.columnHeights[@(section)] = @(self.sectionInset.top); // plus header height;
+            heights[i] = @(self.sectionInset.top); // plus header height;
+            self.columnHeights[@(section)] = heights;
         }
 
         for (NSInteger item = 0; item < itemCount; item++) {
@@ -142,8 +145,10 @@ static NSString *const HYDMasonryContentCell = @"HYDMasonryContentCell";
     
     __block CGFloat height = 0;
     
-    [self.columnHeights enumerateObjectsUsingBlock:^(NSNumber *columnHeight, NSUInteger idx, BOOL *stop) {
-        height = MAX([columnHeight floatValue], height);
+    [[self.columnHeights allValues] enumerateObjectsUsingBlock:^(NSArray *heightByColumn, NSUInteger idx, BOOL *stop) {
+        [heightByColumn enumerateObjectsUsingBlock:^(NSNumber *columnHeight, NSUInteger idx, BOOL *stop) {
+            height = MAX([columnHeight floatValue], height);
+        }];
     }];
     
     return CGSizeMake(CGRectGetWidth(self.collectionView.bounds), height + self.sectionInset.bottom);
@@ -154,7 +159,7 @@ static NSString *const HYDMasonryContentCell = @"HYDMasonryContentCell";
 - (NSMutableDictionary *)columnHeights {
     
     if (!_columnHeights) {
-        _columnHeights = [NSMutableDictionary dictionaryWithCapacity:self.numberOfColumns];
+        _columnHeights = [NSMutableDictionary dictionaryWithCapacity:[self.collectionView numberOfSections]];
     }
     
     return _columnHeights;
@@ -218,8 +223,9 @@ static NSString *const HYDMasonryContentCell = @"HYDMasonryContentCell";
     
     // Update Column heights array
     
+    NSMutableArray *sectionColumnHeights = (NSMutableArray *)self.columnHeights[@(attributes.indexPath.section)];
     for (NSUInteger i=attributes.columnIndex; i < attributes.columnIndex + attributes.columnSpan; i++) {
-        self.columnHeights[i] = @(origin.y + attributes.size.height);
+        sectionColumnHeights[i] = @(origin.y + attributes.size.height);
     }
     
     return origin;
@@ -230,11 +236,13 @@ static NSString *const HYDMasonryContentCell = @"HYDMasonryContentCell";
     //Calculate the columnIndex based on the shortest column that will take the item span
     
     NSUInteger columnIndex = 0;
+    NSArray *sectionColumnHeights = (NSArray *)self.columnHeights[@(attributes.indexPath.section)];
+    
     if (attributes.indexPath.item != 0) {
         CGFloat columnHeight = MAXFLOAT;
         for (NSUInteger i = 0; i <= self.numberOfColumns - attributes.columnSpan; i++) {
-            if ([self.columnHeights[i] floatValue] < columnHeight) {
-                columnHeight = [self.columnHeights[i] floatValue];
+            if ([sectionColumnHeights[i] floatValue] < columnHeight) {
+                columnHeight = [sectionColumnHeights[i] floatValue];
                 columnIndex = i;
             }
         }
@@ -250,11 +258,12 @@ static NSString *const HYDMasonryContentCell = @"HYDMasonryContentCell";
 - (CGFloat)yOriginForItemWithAttributes:(HYDCollectionViewMasonryLayoutAttributes *)attributes {
     
     __block CGFloat yPosition = 0;
+    NSArray *sectionColumnHeights = (NSArray *)self.columnHeights[@(attributes.indexPath.section)];
     for (NSUInteger i=attributes.columnIndex; i<attributes.columnIndex + attributes.columnSpan; i++) {
-        yPosition = MAX([self.columnHeights[i] floatValue], yPosition);
+        yPosition = MAX([sectionColumnHeights[i] floatValue], yPosition);
     }
     
-    if ([self.columnHeights[attributes.columnIndex] integerValue] > self.sectionInset.top) {
+    if ([sectionColumnHeights[attributes.columnIndex] integerValue] > self.sectionInset.top) {
         yPosition = yPosition + self.minimumLineSpacing;
     }
     
