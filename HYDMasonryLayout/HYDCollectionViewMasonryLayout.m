@@ -201,7 +201,7 @@
     if (attributes.indexPath.item != 0) {
         attributes.columnIndex = [self columnIndexForItemWithAttributes:attributes];
         origin.x = [self xOriginForItemWithAttribites:attributes] + origin.x;
-        origin.y = [self yOriginForItemWithAttributes:attributes] + origin.y;
+        origin.y = [self yOriginForItemWithAttributes:attributes];
     }
     
     // Update Column heights array
@@ -232,7 +232,7 @@
 }
 
 - (CGFloat)xOriginForItemWithAttribites:(HYDCollectionViewMasonryLayoutAttributes *)attributes {
-    return (self.columnWidth * attributes.columnIndex);
+    return ((self.columnWidth + self.minimumInteritemSpacing) * attributes.columnIndex);
 }
 
 - (CGFloat)yOriginForItemWithAttributes:(HYDCollectionViewMasonryLayoutAttributes *)attributes {
@@ -242,7 +242,7 @@
         yPosition = MAX([self.columnHeights[i] floatValue], yPosition);
     }
     
-    if ([self.columnHeights[attributes.columnIndex] integerValue] > 0) {
+    if ([self.columnHeights[attributes.columnIndex] integerValue] > self.sectionInset.top) {
         yPosition = yPosition + self.minimumLineSpacing;
     }
     
@@ -266,9 +266,8 @@
 
 - (void)configureColumnWidth {
     
-    //interitemSpacing
-    
-    self.columnWidth = floor((CGRectGetWidth(self.collectionView.bounds) - self.sectionInset.left - self.sectionInset.right) / self.numberOfColumns);
+    CGFloat netWidth = CGRectGetWidth(self.collectionView.bounds) - self.sectionInset.left - self.sectionInset.right;
+    self.columnWidth = floor((netWidth - (self.minimumInteritemSpacing * (self.numberOfColumns -1))) / self.numberOfColumns);
 }
 
 - (void)configureSectionInsetsForSectionAtIndex:(NSUInteger)section {
