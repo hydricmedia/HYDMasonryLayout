@@ -14,8 +14,6 @@
 @interface HYDMasonryLayoutViewController () <UICollectionViewDataSource, UICollectionViewDelegate, HYDCollectionViewMasonryLayoutDelegate>
 
 @property (nonatomic, weak) IBOutlet HYDCollectionViewMasonryLayout *layout;
-@property (nonatomic, weak) IBOutlet UISegmentedControl *sortSegmentedControl;
-@property (nonatomic, weak) IBOutlet UISegmentedControl *filterSegmentedControl;
 
 @property (nonatomic, strong) NSMutableArray *elements;
 @property (nonatomic, strong) NSMutableArray *things;
@@ -57,14 +55,6 @@
     return _things;
 }
 
-#pragma mark - Actions
-
-- (IBAction)orderChanged:(UISegmentedControl *)sender {
-}
-
-- (IBAction)filterChanged:(UISegmentedControl *)sender {
-}
-
 #pragma mark - UICollectionViewDataSource conformance
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -99,7 +89,6 @@
         return [self.collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HYDHeaderCell" forIndexPath:indexPath];
     }
     
-    
     UICollectionReusableView *footerView;
     if ([kind isEqualToString:UICollectionElementKindSectionFooter]) {
         if (indexPath.section == 0) {
@@ -120,24 +109,47 @@
 
 - (NSUInteger)numberOfColumnsInCollectionView:(UICollectionView *)collectionView {
     
-    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
-    return (UIInterfaceOrientationIsPortrait(orientation)) ? 4 : 5;
+    if (IPHONE) {
+        return 1;
+    } else {
+        UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+        return (UIInterfaceOrientationIsPortrait(orientation)) ? 4 : 5;
+    }
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(20.f, 10.f, 20.f, 10.f);
+    
+    if (IPHONE) {
+        return UIEdgeInsetsMake(10.f, 5.f, 10.f, 5.f);
+    } else {
+        return UIEdgeInsetsMake(20.f, 10.f, 20.f, 10.f);
+    }
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
+    HYDCollectionViewMasonryLayout *layout = (HYDCollectionViewMasonryLayout *)collectionViewLayout;
+    
     if (indexPath.section == 0) {
+        
         HYDElement *element = self.elements[indexPath.item];
-        return CGSizeMake(element.elementWidth, element.elementHeight);
+        
+        if (IPHONE) {
+            return CGSizeMake(CGRectGetWidth(self.collectionView.bounds) - layout.sectionInset.left - layout.sectionInset.right, element.elementHeight);
+        } else {
+            return CGSizeMake(element.elementWidth, element.elementHeight);
+        }
     }
     
     if (indexPath.section == 1) {
+        
         HYDElement *element = self.things[indexPath.item];
-        return CGSizeMake(element.elementWidth, element.elementHeight);
+        
+        if (IPHONE) {
+            return CGSizeMake(CGRectGetWidth(self.collectionView.bounds) - layout.sectionInset.left - layout.sectionInset.right, element.elementHeight);
+        } else {
+            return CGSizeMake(element.elementWidth, element.elementHeight);
+        }
     }
     
     return CGSizeZero;

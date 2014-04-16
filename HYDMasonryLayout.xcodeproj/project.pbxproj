@@ -45,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A939F04218FE42E800475D2D /* HYD-Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HYD-Macros.h"; sourceTree = "<group>"; };
 		A9976C9818FA664F002EA08F /* periodictabledump.csv.bak */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = periodictabledump.csv.bak; sourceTree = "<group>"; };
 		A9976C9A18FA68D0002EA08F /* periodictabledump.csv.bak2.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = periodictabledump.csv.bak2.csv; sourceTree = "<group>"; };
 		A9B6C63018F8D5770043859F /* HYDMasonryLayout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HYDMasonryLayout.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,6 +153,7 @@
 		A9B6C63A18F8D5770043859F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A939F04218FE42E800475D2D /* HYD-Macros.h */,
 				A9976C9A18FA68D0002EA08F /* periodictabledump.csv.bak2.csv */,
 				A9976C9818FA664F002EA08F /* periodictabledump.csv.bak */,
 				A9B6C66218F8D5960043859F /* periodictabledump.csv */,
