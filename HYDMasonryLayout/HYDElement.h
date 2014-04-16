@@ -17,6 +17,7 @@
 
 @property (nonatomic, assign) CGFloat elementWidth;
 @property (nonatomic, assign) CGFloat elementHeight;
+@property (nonatomic, assign) CGFloat elementWidthLandscape;
 
 - (id)initWithLineArray:(NSArray *)array;
 - (NSString *)descriptionWithWidthAndHeight;

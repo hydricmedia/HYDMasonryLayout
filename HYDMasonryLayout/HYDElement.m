@@ -33,6 +33,7 @@
         _elementSymbol = [array[3] stringByTrimmingCharactersInSet:charSet];
         _elementWidth = [[array[4] stringByTrimmingCharactersInSet:charSet] floatValue];
         _elementHeight = [[array[5] stringByTrimmingCharactersInSet:charSet] floatValue];
+        _elementWidthLandscape = [[array[6] stringByTrimmingCharactersInSet:charSet] floatValue];
 //        _elementWidth = [self itemWidth];
 //        _elementHeight = [self itemHeight];
     }
@@ -45,7 +46,7 @@
 }
 
 - (NSString *)descriptionWithWidthAndHeight {
-    return [NSString stringWithFormat:@"%d -- %@: %@, Width: %f, Height: %f", self.elementNo, self.elementSymbol, self.elementName, self.elementWidth, self.elementHeight];
+    return [NSString stringWithFormat:@"%d -- %@: %@, PWidth: %f, Height: %f, LWidth: %f", self.elementNo, self.elementSymbol, self.elementName, self.elementWidth, self.elementHeight, self.elementWidthLandscape];
 }
 
 #pragma mark - Public methods

@@ -113,7 +113,7 @@
         return 1;
     } else {
         UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
-        return (UIInterfaceOrientationIsPortrait(orientation)) ? 4 : 5;
+        return (UIInterfaceOrientationIsPortrait(orientation)) ? 4 : 6;
     }
 }
 
@@ -137,7 +137,13 @@
         if (IPHONE) {
             return CGSizeMake(CGRectGetWidth(self.collectionView.bounds) - layout.sectionInset.left - layout.sectionInset.right, element.elementHeight);
         } else {
-            return CGSizeMake(element.elementWidth, element.elementHeight);
+            
+            if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
+                return CGSizeMake(element.elementWidth, element.elementHeight);
+            } else {
+                return CGSizeMake(element.elementWidthLandscape, element.elementHeight);
+            }
+            
         }
     }
     
@@ -148,7 +154,12 @@
         if (IPHONE) {
             return CGSizeMake(CGRectGetWidth(self.collectionView.bounds) - layout.sectionInset.left - layout.sectionInset.right, element.elementHeight);
         } else {
-            return CGSizeMake(element.elementWidth, element.elementHeight);
+            
+            if (UIInterfaceOrientationIsPortrait([[UIApplication sharedApplication] statusBarOrientation])) {
+                return CGSizeMake(element.elementWidth, element.elementHeight);
+            } else {
+                return CGSizeMake(element.elementWidthLandscape, element.elementHeight);
+            }
         }
     }
     
