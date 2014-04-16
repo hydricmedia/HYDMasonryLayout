@@ -29,6 +29,9 @@
 		A9B6C67518F8D6A60043859F /* Storyboard-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9B6C67318F8D6A60043859F /* Storyboard-iPad.storyboard */; };
 		A9B6C67618F8D6A60043859F /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9B6C67418F8D6A60043859F /* Storyboard.storyboard */; };
 		A9B6C67918F8D7740043859F /* HYDCollectionViewMasonryLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = A9B6C67818F8D7740043859F /* HYDCollectionViewMasonryLayout.m */; };
+		A9FEFA0B18FD2452009EF325 /* HYDHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9FEFA0A18FD2452009EF325 /* HYDHeaderCell.xib */; };
+		A9FEFA0D18FD246B009EF325 /* HYDFooterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9FEFA0C18FD246B009EF325 /* HYDFooterCell.xib */; };
+		A9FEFA0F18FE03CE009EF325 /* thingsdump.csv in Resources */ = {isa = PBXBuildFile; fileRef = A9FEFA0E18FE03CE009EF325 /* thingsdump.csv */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +76,9 @@
 		A9B6C67718F8D7740043859F /* HYDCollectionViewMasonryLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HYDCollectionViewMasonryLayout.h; sourceTree = "<group>"; };
 		A9B6C67818F8D7740043859F /* HYDCollectionViewMasonryLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HYDCollectionViewMasonryLayout.m; sourceTree = "<group>"; };
 		A9B6C67A18F9361E0043859F /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Reveal.framework; sourceTree = "<group>"; };
+		A9FEFA0A18FD2452009EF325 /* HYDHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HYDHeaderCell.xib; sourceTree = "<group>"; };
+		A9FEFA0C18FD246B009EF325 /* HYDFooterCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HYDFooterCell.xib; sourceTree = "<group>"; };
+		A9FEFA0E18FE03CE009EF325 /* thingsdump.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = thingsdump.csv; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +155,7 @@
 				A9976C9A18FA68D0002EA08F /* periodictabledump.csv.bak2.csv */,
 				A9976C9818FA664F002EA08F /* periodictabledump.csv.bak */,
 				A9B6C66218F8D5960043859F /* periodictabledump.csv */,
+				A9FEFA0E18FE03CE009EF325 /* thingsdump.csv */,
 				A9B6C63B18F8D5770043859F /* HYDMasonryLayout-Info.plist */,
 				A9B6C63C18F8D5770043859F /* InfoPlist.strings */,
 				A9B6C63F18F8D5770043859F /* main.m */,
@@ -194,6 +201,8 @@
 				A9B6C66F18F8D6890043859F /* HYDElementCell.xib */,
 				A9B6C67018F8D6890043859F /* HYDElementCell.h */,
 				A9B6C66E18F8D6890043859F /* HYDElementCell.m */,
+				A9FEFA0A18FD2452009EF325 /* HYDHeaderCell.xib */,
+				A9FEFA0C18FD246B009EF325 /* HYDFooterCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -292,8 +301,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9FEFA0D18FD246B009EF325 /* HYDFooterCell.xib in Resources */,
 				A9976C9918FA664F002EA08F /* periodictabledump.csv.bak in Resources */,
 				A9B6C66318F8D5960043859F /* periodictabledump.csv in Resources */,
+				A9FEFA0F18FE03CE009EF325 /* thingsdump.csv in Resources */,
+				A9FEFA0B18FD2452009EF325 /* HYDHeaderCell.xib in Resources */,
 				A9B6C63E18F8D5770043859F /* InfoPlist.strings in Resources */,
 				A9B6C67218F8D6890043859F /* HYDElementCell.xib in Resources */,
 				A9B6C67518F8D6A60043859F /* Storyboard-iPad.storyboard in Resources */,

@@ -18,6 +18,7 @@
 @property (nonatomic, weak) IBOutlet UISegmentedControl *filterSegmentedControl;
 
 @property (nonatomic, strong) NSMutableArray *elements;
+@property (nonatomic, strong) NSMutableArray *things;
 
 @end
 
@@ -28,6 +29,8 @@
     [super viewDidLoad];
     
     [self createElements];
+    [self createThings];
+
     [self registerNibs];
 }
 
@@ -45,6 +48,15 @@
     return _elements;
 }
 
+- (NSMutableArray *)things
+{
+    if (!_things) {
+        _things = [NSMutableArray new];
+    }
+    
+    return _things;
+}
+
 #pragma mark - Actions
 
 - (IBAction)orderChanged:(UISegmentedControl *)sender {
@@ -56,11 +68,19 @@
 #pragma mark - UICollectionViewDataSource conformance
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [self.elements count];
+    
+    switch (section) {
+        case 0:
+            return [self.elements count];
+        case 1:
+            return [self.things count];
+        default:
+            return 0;
+    }
 }
 
 #pragma mark - UICollectionViewDelegate conformance
@@ -71,6 +91,29 @@
     [self configureCell:cell forIndexPath:indexPath];
     
     return cell;
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+    
+    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+        return [self.collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HYDHeaderCell" forIndexPath:indexPath];
+    }
+    
+    
+    UICollectionReusableView *footerView;
+    if ([kind isEqualToString:UICollectionElementKindSectionFooter]) {
+        if (indexPath.section == 0) {
+            footerView = [self.collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"HYDFooterCell" forIndexPath:indexPath];
+            footerView.backgroundColor = [UIColor lightGrayColor];
+            return footerView;
+        } else {
+            footerView = [self.collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"HYDFooterCell" forIndexPath:indexPath];
+            footerView.backgroundColor = [UIColor blueColor];
+            return footerView;
+        }
+    }
+    
+    return nil;
 }
 
 #pragma mark - HYDCollectionViewMasonryLayoutDelegate conformance
@@ -87,16 +130,25 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    HYDElement *element = self.elements[indexPath.item];
-    return CGSizeMake(element.elementWidth, element.elementHeight);
+    if (indexPath.section == 0) {
+        HYDElement *element = self.elements[indexPath.item];
+        return CGSizeMake(element.elementWidth, element.elementHeight);
+    }
+    
+    if (indexPath.section == 1) {
+        HYDElement *element = self.things[indexPath.item];
+        return CGSizeMake(element.elementWidth, element.elementHeight);
+    }
+    
+    return CGSizeZero;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-    return CGSizeZero;
+    return CGSizeMake(CGRectGetWidth(self.collectionView.bounds), 200.f);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
-    return CGSizeZero;
+    return CGSizeMake(CGRectGetWidth(self.collectionView.bounds), 100.f);
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
@@ -111,7 +163,12 @@
 
 - (void)configureCell:(HYDElementCell *)cell forIndexPath:(NSIndexPath *)indexPath {
     
-    HYDElement *element = self.elements[indexPath.item];
+    HYDElement *element;
+    if (indexPath.section == 0) {
+        element = self.elements[indexPath.item];
+    } else {
+        element = self.things[indexPath.item];
+    }
     
     cell.elementName = element.elementName;
     cell.elementNumberLabel.text = [NSString stringWithFormat:@"%d", element.elementNo];
@@ -137,8 +194,29 @@
     }];
 }
 
+- (void)createThings {
+    
+    NSError *error;
+    NSString *fileString = [NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"thingsdump.csv" ofType:nil] encoding:NSUTF8StringEncoding error:&error];
+    
+    if (error) {
+        NSLog(@"%@", error.localizedDescription);
+        return;
+    }
+    
+    NSArray *fileArray = [fileString componentsSeparatedByString:@"\n"];
+    [fileArray enumerateObjectsUsingBlock:^(NSString *elementsLine, NSUInteger idx, BOOL *stop) {
+        NSArray *lineArray = [elementsLine componentsSeparatedByString:@","];
+        HYDElement *element = [[HYDElement alloc] initWithLineArray:lineArray];
+        [self.things addObject:element];
+        NSLog(@"%@", [element descriptionWithWidthAndHeight]);
+    }];
+}
+
 - (void)registerNibs {
-        [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([HYDElementCell class]) bundle:nil] forCellWithReuseIdentifier:NSStringFromClass([HYDElementCell class])];
+    [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([HYDElementCell class]) bundle:nil] forCellWithReuseIdentifier:NSStringFromClass([HYDElementCell class])];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"HYDHeaderCell" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HYDHeaderCell"];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"HYDFooterCell" bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"HYDFooterCell"];
 }
 
 @end
